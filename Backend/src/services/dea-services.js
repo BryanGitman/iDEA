@@ -1,4 +1,4 @@
-import config from '../../dbconfig.js';
+import {config} from '../../dbconfig.js';
 import sql from 'mssql';
 
 class DEAService
@@ -8,7 +8,7 @@ class DEAService
         let returnList = null;
         try{
             let pool = await sql.connect(config);
-            let result = await pool.request().query('SELECT * FROM DEA');
+            let result = await pool.request().query('SELECT DEA.Id, DEA.Descripcion, ubi.Calle, ubi.Altura, ubi.Latitud, ubi.Longitud, est.Nombre FROM DEA inner join Ubicacion ubi on DEA.IdUbicacion = ubi.Id inner join Establecimiento est on ubi.IdEstablecimiento = est.Id');
             returnList = result.recordsets[0];
         } catch(error){
             console.log(error);
