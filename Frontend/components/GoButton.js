@@ -13,8 +13,11 @@ GoButton = () =>
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    background: '#074496',
-    //borderRadius: '50%'
+    float: 'right',
+    width: 100,
+    height: 100,
+    backgroundColor: '#074496',
+    borderRadius: 100/2
   }
 });
 
