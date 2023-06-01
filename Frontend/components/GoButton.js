@@ -1,23 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 GoButton = () =>
 {
   return (
-    <View style={styles.container}>
-      
-    </View>
+    <TouchableOpacity
+      //onPress={}
+      style={styles.container}>
+      <Icon name="arrowright" size={45} color="#FFF" />
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    float: 'right',
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
+    position: 'absolute',
+    right: -100,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 100,
     backgroundColor: '#074496',
-    borderRadius: 100/2
   }
 });
 

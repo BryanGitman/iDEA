@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   contenido: {
     flex: 1,
     margin: 25,
-    width: '70%'
+    width: '60%'
   }
 });
   

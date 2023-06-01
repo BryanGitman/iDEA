@@ -1,19 +1,28 @@
+import axios from 'axios';
 import React, { useCallback, useEffect, useState, Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import Header from './components/Header';
-import FirstDEA from './components/FirstDEA';
+import List from './components/List';
+
+axios.defaults.baseURL = 'http://localhost:3000';
 
 export default function App() {
+  const [firstDeas, setFirstDea] = useState([]);
+
+  getDEA = () => axios.get('/dea').then(res => setFirstDea(res.data));
+
+  useEffect(() => {
+    getDEA();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Header></Header>
       <View style={styles.masCercanos}><Text style={{fontWeight: 'bold', color: '#FFF', fontSize: 17}}>MÁS CERCANOS:</Text></View>
-      <FirstDEA direccion="Yatay 240" establecimiento="ORT" descripcion="Edificio 1, planta baja al lado de las escaleras"></FirstDEA>
-      <FirstDEA direccion="Yatay 240" establecimiento="ORT" descripcion="Edificio 1, piso 2, al lado de coordinación"></FirstDEA>
-      <FirstDEA direccion="Rio de Janeiro 509" establecimiento="ORT" descripcion="Edificio 2, auditorio"></FirstDEA>
+      <List deas={firstDeas}></List>
     </View>
   );
 }
