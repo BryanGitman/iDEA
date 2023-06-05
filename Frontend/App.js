@@ -6,17 +6,16 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import Header from './components/Header';
 import List from './components/List';
+import UserLocation from './UserLocation';
 
 axios.defaults.baseURL = 'http://localhost:3000';
 
 export default function App() {
   const [firstDeas, setFirstDea] = useState([]);
 
-  getDEA = () => axios.get('/dea').then(res => setFirstDea(res.data));
+  const getDEA = () => axios.get('/dea').then(res => setFirstDea(res.data)).catch(error => console.log(error));
 
-  useEffect(() => {
-    getDEA();
-  }, []);
+  useEffect(() => {getDEA();}, []);
 
   return (
     <View style={styles.container}>
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
     //fontFamily: 'Poppins'
   },
   masCercanos: {
-    flex: 1,
+    position: 'absolute',
     width: 168,
     height: 30,
     alignItems: 'center',

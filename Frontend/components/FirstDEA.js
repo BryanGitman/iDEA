@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import GoButton from './GoButton';
 
-FirstDEA = ({direccion, establecimiento, descripcion}) =>
+const FirstDEA = ({direccion, establecimiento, descripcion}) =>
 {
   return (
     <View style={styles.ventana}>
@@ -18,11 +18,11 @@ FirstDEA = ({direccion, establecimiento, descripcion}) =>
 
 const styles = StyleSheet.create({
   ventana: {
-    flex: 1,
+    position: 'relative',
     marginTop: 20,
     width: '95%',
     height: '25%',
-    top: -30,
+    top: 100,
     backgroundColor: '#FFF',
     borderRadius: 10
   },

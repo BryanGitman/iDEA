@@ -9,7 +9,7 @@ app.use(cors());
 
 app.get('/dea', async (req, res) =>
 {
-    const dea = await DEAService.getAll();
+    const dea = await DEAService.getMasCerc();
     res.status(200).send(dea);
 });
 

@@ -3,7 +3,7 @@ import sql from 'mssql';
 
 class DEAService
 {
-    static getAll = async () =>
+    static getMasCerc = async () =>
     {
         let returnList = null;
         try{
