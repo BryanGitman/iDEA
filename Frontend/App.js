@@ -8,12 +8,18 @@ import Header from './components/Header';
 import List from './components/List';
 import UserLocation from './UserLocation';
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'https://d499-200-73-176-50.ngrok-free.app';
 
 export default function App() {
+  const config = {
+    headers:{
+      UserLocation: UserLocation(),
+    }
+  };
+
   const [firstDeas, setFirstDea] = useState([]);
 
-  const getDEA = () => axios.get('/dea').then(res => setFirstDea(res.data)).catch(error => console.log(error));
+  const getDEA = () => axios.get('/dea', config).then(res => setFirstDea(res.data)).catch(error => console.log(error));
 
   useEffect(() => {getDEA();}, []);
 
