@@ -18,11 +18,10 @@ const FirstDEA = ({direccion, establecimiento, descripcion}) =>
 
 const styles = StyleSheet.create({
   ventana: {
-    position: 'relative',
-    marginTop: 20,
+    flex: 1,
+    marginBottom: 15,
     width: '95%',
     height: '25%',
-    top: 100,
     backgroundColor: '#FFF',
     borderRadius: 10
   },

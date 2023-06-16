@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState, Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -24,11 +24,11 @@ export default function App() {
   useEffect(() => {getDEA();}, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header></Header>
-      <View style={styles.masCercanos}><Text style={{fontWeight: 'bold', color: '#FFF', fontSize: 17}}>MÁS CERCANOS:</Text></View>
+      <Text style={{margin: '3%', fontWeight: 'bold', color: '#FFF', fontSize: 17}}>MÁS CERCANOS:</Text>
       <List deas={firstDeas}></List>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -39,12 +39,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     //fontFamily: 'Poppins'
-  },
-  masCercanos: {
-    position: 'absolute',
-    width: 168,
-    height: 30,
-    alignItems: 'center',
-    top: 150
   }
 });

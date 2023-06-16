@@ -15,11 +15,9 @@ const Header = () =>
 
 const styles = StyleSheet.create({
   header: {
-    position: 'absolute',
+    position: 'relative',
     width: '100%',
     height: '15%',
-    left: 0,
-    top: 0,
     backgroundColor: '#FFF',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20
@@ -27,7 +25,7 @@ const styles = StyleSheet.create({
   indexLogo: {
     flex: 1,
     resizeMode: 'contain',
-    marginTop: '3%',
+    marginTop: '5%',
     marginLeft: '27%',
     width: '45%',
   }
