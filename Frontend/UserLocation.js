@@ -33,6 +33,7 @@ function UserLocation() {
                 console.log('Permission to access location was denied');
             } else {
                 console.log('Permission to access location granted');
+                await Permissions.askAsync(Permissions.LOCATION);
                 await Location.startLocationUpdatesAsync('get-location', {accuracy: Location.Accuracy.Balanced})
             }
         };

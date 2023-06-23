@@ -1,43 +1,26 @@
 import axios from 'axios';
-import React, { useCallback, useEffect, useState, Component } from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import * as React from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import Header from './components/Header';
-import List from './components/List';
-import UserLocation from './UserLocation';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import PrimeraPantalla from './screens/PrimeraPantalla';
+import LocalizarDEA from './screens/LocalizarDEA';
 
 axios.defaults.baseURL = 'https://d499-200-73-176-50.ngrok-free.app';
 
-export default function App() {
-  const config = {
-    headers:{
-      UserLocation: UserLocation(),
-    }
-  };
+const Stack = createNativeStackNavigator();
 
-  const [firstDeas, setFirstDea] = useState([]);
-
-  const getDEA = () => axios.get('/dea', config).then(res => setFirstDea(res.data)).catch(error => console.log(error));
-
-  useEffect(() => {getDEA();}, []);
-
+const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Header></Header>
-      <Text style={{margin: '3%', fontWeight: 'bold', color: '#FFF', fontSize: 17}}>MÁS CERCANOS:</Text>
-      <List deas={firstDeas}></List>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Index" component={PrimeraPantalla} />
+        <Stack.Screen name="Home" component={LocalizarDEA} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FF0000',
-    alignItems: 'center',
-    justifyContent: 'center',
-    //fontFamily: 'Poppins'
-  }
-});
+export default App;
