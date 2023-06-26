@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable, Modal } from 'react-native';
+import { StyleSheet, Text, Image, Pressable, Modal } from 'react-native';
 
 const Header = ({navigation}) =>
 {
@@ -23,12 +23,14 @@ const Header = ({navigation}) =>
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
-        <Pressable style={styles.bigHeader} onPress={() => entrar(!modalVisible)}>
-          <Image
-            style={styles.bigIndexLogo}
-            source={require('../assets/logo.png')}
-          />
-          <Text style={{fontSize: 20, flex: 1, marginBottom: '-30%'}}>Presioná para ir a la aplicación</Text>
+        <Pressable style={styles.background} onPress={() => setModalVisible(!modalVisible)}>
+          <Pressable style={styles.bigHeader} onPress={() => entrar(!modalVisible)}>
+            <Image
+              style={styles.bigIndexLogo}
+              source={require('../assets/logo.png')}
+            />
+            <Text style={{fontSize: 20, flex: 1, marginBottom: '-30%'}}>Presioná para ir a la aplicación</Text>
+          </Pressable>
         </Pressable>
       </Modal>
     </Pressable>
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
   bigHeader: {
     position: 'relative',
     width: '100%',
-    height: '35%',
+    height: '30%',
     backgroundColor: '#FFF',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
@@ -67,6 +69,12 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: '5%',
     width: '60%',
+  },
+  background: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    backgroundColor: 'rgba(0,0,0,0.4)'
   }
 });
   
