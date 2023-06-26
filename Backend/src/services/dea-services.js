@@ -9,8 +9,8 @@ class DEAService
         try{
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('pLat',sql.Float,UserLocation.latitude)
-                .input('pLong',sql.Float,UserLocation.longitude)
+                .input('pLat',sql.Float,UserLocation.coords.latitude)
+                .input('pLong',sql.Float,UserLocation.coords.longitude)
                 .query(`
                     SELECT DEA.Id, DEA.Descripcion, ubi.Calle, ubi.Altura, est.Nombre
                     FROM DEA
