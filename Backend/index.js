@@ -9,7 +9,7 @@ app.use(cors());
 
 app.get('/dea', async (req, res) =>
 {
-    const dea = await DEAService.getMasCerc(req.header("UserLocation"));
+    const dea = await DEAService.getMasCerc(req.body);
     res.status(200).send(dea);
 });
 

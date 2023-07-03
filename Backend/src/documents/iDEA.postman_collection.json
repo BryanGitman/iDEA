@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "f3a0d43a-e325-45e4-8af3-72f424644d5e",
+		"name": "iDEA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Mostrar DEA",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"coords\":\r\n    {\r\n        \"latitude\":-34.607868993675446,\r\n        \"longitude\":-58.420907692642224\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/dea",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dea"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
