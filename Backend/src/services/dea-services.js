@@ -34,6 +34,27 @@ class DEAService
         return returnList;
     }
 
+    static getAll = async () =>
+    {
+        let returnList = null;
+        try{
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .query(`
+                    SELECT DEA.Id, DEA.Descripcion, ubi.Calle, ubi.Altura, est.Nombre, ubi.Latitud, ubi.Longitud
+                    FROM DEA
+                    inner join Ubicacion ubi on DEA.IdUbicacion = ubi.Id
+                    inner join Establecimiento est on ubi.IdEstablecimiento = est.Id
+                    inner join Disponibilidad disp on disp.IdDea = DEA.Id
+                    WHERE HorarioApertura < (select convert(varchar(10), GETDATE(), 108)) AND HorarioCierre > (select convert(varchar(10), GETDATE(), 108)) AND Dia = (SELECT DATEPART(dw, (SELECT CONVERT (date, SYSDATETIME())))) AND DEA.Id NOT IN((SELECT IdDEA from Problema))
+                `);
+            returnList = result.recordsets[0];
+        } catch(error){
+            console.log(error);
+        }
+        return returnList;
+    }
+
     static getById = async (id) =>
     {
 

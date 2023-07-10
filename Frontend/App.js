@@ -8,6 +8,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PrimeraPantalla from './screens/PrimeraPantalla';
 import LocalizarDEA from './screens/LocalizarDEA';
+import InfoDEA from './screens/InfoDEA';
 
 axios.defaults.baseURL = 'http://localhost:3000';
 
@@ -39,6 +40,7 @@ const App = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Index" component={PrimeraPantalla} />
         <Stack.Screen name="Home" component={LocalizarDEA} />
+        <Stack.Screen name="infoDEA" component={InfoDEA} />
       </Stack.Navigator>
     </NavigationContainer>
   );

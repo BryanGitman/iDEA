@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19000,
+  "expoServerPort": null,
   "packagerPort": 19000,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://sh-35b.anonymous.frontend.exp.direct",
+  "packagerNgrokUrl": "https://sh-35b.anonymous.frontend.exp.direct",
+  "ngrokPid": 3360,
   "packagerPid": null,
-  "webpackServerPort": 19006
+  "webpackServerPort": null
 }

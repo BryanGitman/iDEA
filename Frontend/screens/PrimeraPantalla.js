@@ -21,7 +21,7 @@ const PrimeraPantalla = ({navigation}) =>
     }
   };
 
-  const getDEA = () => axios.get('/dea', config).then(res => setFirstDea(res.data)).catch(error => console.log(error));
+  const getDEA = () => axios.get('/firstdea', config).then(res => setFirstDea(res.data)).catch(error => console.log(error));
 
   useEffect(() => {
     (async () => {
