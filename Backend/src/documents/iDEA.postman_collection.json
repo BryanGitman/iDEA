@@ -1,10 +1,41 @@
 {
 	"info": {
-		"_postman_id": "f3a0d43a-e325-45e4-8af3-72f424644d5e",
+		"_postman_id": "45cd3d85-9e70-4b35-8ae1-8c64e32b3e26",
 		"name": "iDEA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Mostrar DEA mas cercanos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"coords\":\r\n    {\r\n        \"latitude\":-34.607868993675446,\r\n        \"longitude\":-58.420907692642224\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/firstdea",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"firstdea"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Mostrar DEA",
 			"protocolProfileBehavior": {
@@ -15,7 +46,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"coords\":\r\n    {\r\n        \"latitude\":-34.607868993675446,\r\n        \"longitude\":-58.420907692642224\r\n    }\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
