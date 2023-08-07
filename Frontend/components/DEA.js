@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Image, Pressable } from 'react-native';
 
-const DEA = () =>
+const DEA = ({navigation, idDea}) =>
 {
     return (
-        <Pressable style={styles.container}>
+        <Pressable style={styles.container} onPress={() => navigation.navigate('infoDEA', { id : idDea })}>
             <Image
                 style={styles.dea}
                 source={require('../assets/icono.png')}

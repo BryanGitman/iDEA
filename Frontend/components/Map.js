@@ -5,7 +5,7 @@ const Map = ({deas, navigation}) =>
 {
   return (
     <>
-      {deas.map(dea => <DEA key={dea.Id} onPress={() => navigation.navigate('infoDEA', { id : dea.Id })}></DEA>)}
+      {deas.map(dea => <DEA key={dea.Id} navigation={navigation} id={dea.id}></DEA>)}
     </>
   );
 }

@@ -19,6 +19,18 @@ app.get('/dea', async (req, res) =>
     res.status(200).send(dea);
 });
 
+app.get('/dea/:id', async (req, res) =>
+{
+    const dea = await DEAService.getById(req.params.id);
+    res.status(200).send(dea);
+});
+
+app.get('/dea/disponibilidad/:id', async (req, res) =>
+{
+    const disponibilidad = await DEAService.getDispoById(req.params.id);
+    res.status(200).send(disponibilidad);
+});
+
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
-})
+});

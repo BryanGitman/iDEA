@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, SafeAreaView } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import Map from '../components/Map';
+import BottomSheet from '../components/BottomSheet';
 import * as Location from 'expo-location';
 
 const LocalizarDEA = ({navigation}) => 
@@ -73,10 +74,13 @@ const LocalizarDEA = ({navigation}) =>
 
   return (
     //cargarMapa(location)
-    <SafeAreaView style={styles.container}>
-      <Text>*mapa*</Text>
-      <Map deas={deas} navigation={navigation}></Map>
-    </SafeAreaView>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaView style={styles.container}>
+        <Text>*mapa*</Text>
+        <Map deas={deas} navigation={navigation}></Map>
+      </SafeAreaView>
+      <BottomSheet></BottomSheet>
+    </GestureHandlerRootView>
   );
 }
 
