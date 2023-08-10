@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Modal, Platform, Linking } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-const AccesoDirecto = () => 
+const Shortcut = () => 
 {
   const [modalVisibility, setModalVisibility] = useState(false);
 
@@ -41,6 +42,12 @@ const AccesoDirecto = () =>
       }}
     >
       <View style={styles.modal}>
+        <View style={{flexDirection: "row"}}>
+          <View style={{flexGrow: 1}}></View>
+          <TouchableOpacity onPress={() => setModalVisibility(false)}>
+            <Icon style={styles.exit} name="close" size={30} color="#000000" />
+          </TouchableOpacity>
+        </View>
         <Text style={{fontSize: 20, flex: 1, margin: '10%', textAlign: 'center'}}>Agregá un acceso rápido a la aplicación en caso de emergencia</Text>
         <View style={styles.footer}>
           <TouchableOpacity
@@ -63,6 +70,7 @@ const AccesoDirecto = () =>
 
 const styles = StyleSheet.create({
   modal: {
+    flex: 1,
     position: 'absolute',
     top: '20%',
     left: '10%',
@@ -93,7 +101,13 @@ const styles = StyleSheet.create({
   closeButton: {
     marginLeft: '3%',
     backgroundColor: 'grey'
+  },
+  exit: {
+    alignSelf: 'flex-end',
+    paddingLeft: 5,
+    paddingRight: 5,
+    margin: 10
   }
 });
 
-export default AccesoDirecto;
+export default Shortcut;

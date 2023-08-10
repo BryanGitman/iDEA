@@ -6,7 +6,7 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import Header from '../components/Header';
 import List from '../components/List';
-import AccesoDirecto from '../components/AccesoDirecto';
+import Shortcut from '../components/Shortcut';
 import * as Location from 'expo-location';
 
 const PrimeraPantalla = ({navigation}) => 
@@ -68,7 +68,7 @@ const PrimeraPantalla = ({navigation}) =>
       <Text style={{margin: '3%', fontWeight: 'bold', color: '#FFF', fontSize: 17}}>MÁS CERCANOS:</Text>
       <List deas={firstDeas}></List>
 
-      <AccesoDirecto navigation={navigation}></AccesoDirecto>
+      <Shortcut navigation={navigation}></Shortcut>
     </SafeAreaView>
   );
 }

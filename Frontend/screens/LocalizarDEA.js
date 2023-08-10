@@ -39,7 +39,7 @@ const LocalizarDEA = ({navigation}) =>
         "Latitud": -34.609952548530885,
         "Longitud": -58.42916481268707
     }
-]);
+  ]);
 
   const getDEA = () => axios.get('/dea').then(res => setDea(res.data)).catch(error => console.log(error));
 
