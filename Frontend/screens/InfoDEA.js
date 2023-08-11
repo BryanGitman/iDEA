@@ -1,14 +1,33 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, SafeAreaView, View, ScrollView, Image } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import AppLoading from 'expo-app-loading';
-import IconE from 'react-native-vector-icons/Entypo';
-import IconA from 'react-native-vector-icons/AntDesign';
+import NavInfo from '../components/NavInfo';
+import FirstInfo from '../components/FirstInfo';
+import Phone from '../components/Phone';
+import Details from '../components/Details';
+import DataH from '../components/DataH';
+import Disponibility from '../components/Disponibility';
 
-const InfoDEA = ({navigation, id}) => 
+const InfoDEA = ({route, navigation}) => 
 {
-    const [dea, setDea] = useState([]);
+    const id = route.params;
+
+    const [dea, setDea] = useState({
+        
+        "Id": 1,
+        "Calle": "Rio de Janeiro",
+        "Altura": 509,
+        "Ciudad": "Buenos Aires",
+        "Pais": "ARG",
+        "CodigoPostal": "C1405",
+        "Descripcion": "Edificio 2, auditorio",
+        "Telefono": "011 4883 9134",
+        "Accesibilidad": "Interior",
+        "Nombre": "Escuela Ort"
+        
+    });
     const [disponibilidad, setDisponibilidad] = useState([]);
 
     const getDEA = () => axios.get('/dea/' + id).then(res => setDea(res.data)).catch(error => console.log(error));
@@ -22,9 +41,19 @@ const InfoDEA = ({navigation, id}) =>
 
     return(
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity><IconE name="chevron-down" size={45} color="#000000" /></TouchableOpacity>
-            <TouchableOpacity><IconA name="search1" size={45} color="#000000" /></TouchableOpacity>
-            <TouchableOpacity><IconE name="warning" size={45} color="#000000" /></TouchableOpacity>
+            <NavInfo navigation={navigation}></NavInfo>
+            <ScrollView>
+                <FirstInfo establecimiento={dea.Nombre} direccion={dea.Calle + " " + dea.Altura} descripcion={dea.Descripcion}></FirstInfo>
+                <Image style={styles.imagen} source={require(`../assets/riodj.png`)}/>
+                <Phone telefono={dea.Telefono}></Phone>
+                <View style={styles.line}></View>
+                <Details ciudad={dea.Ciudad} pais={dea.Pais} codPostal={dea.CodigoPostal}></Details>
+                <View style={styles.line}></View>
+                <DataH descripcion="Situación" dato={dea.Accesibilidad}></DataH>
+                <View style={styles.line}></View>
+                <Disponibility disponibilidad={disponibilidad} getDisponibilidad={getDisponibilidad}></Disponibility>
+                <View style={styles.line}></View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -34,8 +63,21 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
+    },
+    imagen: {
+        flex: 1,
+        width: '100%',
+        resizeMode: 'cover'
+    },
+    line: {
+        width: '100%',
+        height: 3,
+        backgroundColor: '#00000040',
+        alignSelf: 'center',
+        marginVertical: 25,
+        borderRadius: 10
     }
-  });
+});
 
 export default InfoDEA;

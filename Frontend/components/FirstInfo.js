@@ -1,14 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View} from 'react-native';
 import GoButton from './GoButton';
+import { StyleSheet, Text, View} from 'react-native';
 
-const FirstDEA = ({direccion, establecimiento, descripcion}) =>
+const FirstInfo = ({direccion, establecimiento, descripcion}) =>
 {
   return (
     <View style={styles.ventana}>
       <View style={styles.contenido}>
-        <Text style={{fontSize: 28, paddingBottom: 10}}>{direccion}</Text>
         <Text style={{fontSize: 24, paddingBottom: 10}}>{establecimiento}</Text>
+        <Text style={{fontSize: 20, paddingBottom: 10}}>{direccion}</Text>
         <Text style={{fontSize: 20}}>{descripcion}</Text>
       </View>
       <GoButton></GoButton>
@@ -18,19 +18,19 @@ const FirstDEA = ({direccion, establecimiento, descripcion}) =>
 
 const styles = StyleSheet.create({
   ventana: {
-    flex: 1,
-    flexDirection:'row',
-    marginBottom: 15,
-    width: '95%',
-    height: '25%',
-    backgroundColor: '#FFF',
-    borderRadius: 10
+    marginTop: -30,
+    width: '100%',
+    height: '17%',
+    flexDirection: 'row',
+    marginBottom: '5%'
   },
   contenido: {
     flex: 1,
-    margin: 25,
-    width: '60%'
+    margin: '8%',
+    width: '85%'
   }
 });
-  
-export default FirstDEA;
+ 
+export default FirstInfo;
+
+

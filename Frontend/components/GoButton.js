@@ -15,17 +15,16 @@ const GoButton = () =>
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: 80,
     height: 80,
-    position: 'absolute',
-    right: -100,
-    bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
     borderRadius: 100,
     backgroundColor: '#074496',
+    marginRight: '7%',
+    marginBottom: '7%',
+    alignSelf: 'flex-end'
   }
 });
 

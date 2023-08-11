@@ -79,7 +79,7 @@ const LocalizarDEA = ({navigation}) =>
         <Text>*mapa*</Text>
         <Map deas={deas} navigation={navigation}></Map>
       </SafeAreaView>
-      <BottomSheet></BottomSheet>
+      {/*<BottomSheet></BottomSheet>*/}
     </GestureHandlerRootView>
   );
 }
