@@ -28,11 +28,8 @@ const InfoDEA = ({route, navigation}) =>
         "Nombre": "Escuela Ort"
         
     });
-    const [disponibilidad, setDisponibilidad] = useState([]);
 
     const getDEA = () => axios.get('/dea/' + id).then(res => setDea(res.data)).catch(error => console.log(error));
-
-    const getDisponibilidad = () => axios.get('/dea/disponibilidad/' + id).then(res => setDisponibilidad(res.data)).catch(error => console.log(error));
 
     useEffect(() => 
     {
@@ -42,7 +39,7 @@ const InfoDEA = ({route, navigation}) =>
     return(
         <SafeAreaView style={styles.container}>
             <NavInfo navigation={navigation}></NavInfo>
-            <ScrollView>
+            <ScrollView style={{width: '100%'}}>
                 <FirstInfo establecimiento={dea.Nombre} direccion={dea.Calle + " " + dea.Altura} descripcion={dea.Descripcion}></FirstInfo>
                 <Image style={styles.imagen} source={require(`../assets/riodj.png`)}/>
                 <Phone telefono={dea.Telefono}></Phone>
@@ -51,7 +48,7 @@ const InfoDEA = ({route, navigation}) =>
                 <View style={styles.line}></View>
                 <DataH descripcion="Situación" dato={dea.Accesibilidad}></DataH>
                 <View style={styles.line}></View>
-                <Disponibility disponibilidad={disponibilidad} getDisponibilidad={getDisponibilidad}></Disponibility>
+                <Disponibility id={id}></Disponibility>
                 <View style={styles.line}></View>
             </ScrollView>
         </SafeAreaView>

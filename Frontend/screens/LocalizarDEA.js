@@ -7,6 +7,12 @@ import AppLoading from 'expo-app-loading';
 import Map from '../components/Map';
 import BottomSheet from '../components/BottomSheet';
 import * as Location from 'expo-location';
+//import MapLibreGL from '@rnmapbox/maps';
+
+/*MapLibreGL.setWellKnownTileServer(MapLibreGL.TileServers.MapLibre);
+MapLibreGL.setAccessToken(null);
+
+const MAPTILER_API_KEY = "fEiqmpW3iwff7X3070kV";*/
 
 const LocalizarDEA = ({navigation}) => 
 {
@@ -52,28 +58,20 @@ const LocalizarDEA = ({navigation}) =>
     getDEA();
   }, []);
 
-  /*function cargarMapa(location) {
-    maptilersdk.config.apiKey = 'fEiqmpW3iwff7X3070kV';
-    const map = new maptilersdk.Map({
-      container: 'map',
-      style: maptilersdk.MapStyle.STREETS,
-      center: [location.coords.longitude, location.coords.latitude],
-      zoom: 18,
-    });
-    
-    setMarkers(map);
-  }
-  
-  function setMarkers(map) {
-    deas.map(dea => {
-      new maptilersdk.Marker()
-        .setLngLat([dea.Longitud, dea.Latitud])
-        .addTo(map);
-    });
-  }*/
-
   return (
-    //cargarMapa(location)
+    /*<View style={styles.page}>
+      <View style={styles.container}>
+        <MapLibreGL.MapView
+          style={styles.map}
+          styleURL={`https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_API_KEY}`}
+          logoEnabled={false}
+          attributionPosition={{bottom: 8, right: 8}}>
+          <MapLibreGL.Camera
+            defaultSettings={{centerCoordinate: [2, 41.5], zoomLevel: 8}}
+          />
+        </MapLibreGL.MapView>
+      </View>
+    </View>*/
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaView style={styles.container}>
         <Text>*mapa*</Text>
@@ -91,9 +89,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  /*page: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    width: '100%',
+    height: '100%',
+  },
   map: {
     flex: 1,
-  }
+  },
+  image: {
+    width: 25,
+    height: 25,
+  }*/
 });
 
 export default LocalizarDEA;
