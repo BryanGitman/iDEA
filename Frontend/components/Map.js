@@ -5,7 +5,7 @@ const Map = ({deas, navigation}) =>
 {
   return (
     <>
-      {deas.map(dea => <DEA key={dea.Id} navigation={navigation} id={dea.id}></DEA>)}
+      {deas.map(dea => <DEA key={dea.Id} navigation={navigation} idDea={dea.Id}></DEA>)}
     </>
   );
 }

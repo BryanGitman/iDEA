@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
@@ -9,6 +9,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PrimeraPantalla from './screens/PrimeraPantalla';
 import LocalizarDEA from './screens/LocalizarDEA';
 import InfoDEA from './screens/InfoDEA';
+import Login from './screens/Login';
+import Register from './screens/Register';
+import UserContext from "./context/userContext";
 
 axios.defaults.baseURL = 'http://localhost:3000';
 
@@ -17,6 +20,8 @@ const Stack = createNativeStackNavigator();
 //SplashScreen.preventAutoHideAsync();
 
 const App = () => {
+  const [usuario, setUsuario] = useState({});
+
   const [fontsLoaded] = useFonts({
     'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
     'Poppins-Bold': require('./assets/fonts/Poppins-SemiBold.ttf'),
@@ -35,14 +40,27 @@ const App = () => {
     return null;
   }
 
+  const getUsuario = nomUsuario =>
+  {
+    axios.post('/user', {
+    Nombre: nomUsuario
+    }).then(res => {
+        setUsuario(res.data);
+    }).catch(error => console.log(error));
+  }
+
   return (
-    <NavigationContainer onLayout={onLayoutRootView}>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Index" component={PrimeraPantalla} />
-        <Stack.Screen name="Home" component={LocalizarDEA} />
-        <Stack.Screen name="infoDEA" component={InfoDEA} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserContext.Provider value={{usuario, setUsuario, getUsuario}}>
+      <NavigationContainer onLayout={onLayoutRootView}>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Index" component={PrimeraPantalla} />
+          <Stack.Screen name="Home" component={LocalizarDEA} />
+          <Stack.Screen name="InfoDEA" component={InfoDEA} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserContext.Provider>
   );
 };
 

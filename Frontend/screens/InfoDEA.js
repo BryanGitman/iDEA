@@ -12,7 +12,7 @@ import Disponibility from '../components/Disponibility';
 
 const InfoDEA = ({route, navigation}) => 
 {
-    const id = route.params;
+    const {id} = route.params;
 
     const [dea, setDea] = useState({
         
@@ -24,7 +24,7 @@ const InfoDEA = ({route, navigation}) =>
         "CodigoPostal": "C1405",
         "Descripcion": "Edificio 2, auditorio",
         "Telefono": "011 4883 9134",
-        "Accesibilidad": "Interior",
+        "Accesibilidad": 1,
         "Nombre": "Escuela Ort"
         
     });
@@ -46,7 +46,7 @@ const InfoDEA = ({route, navigation}) =>
                 <View style={styles.line}></View>
                 <Details ciudad={dea.Ciudad} pais={dea.Pais} codPostal={dea.CodigoPostal}></Details>
                 <View style={styles.line}></View>
-                <DataH descripcion="Situación" dato={dea.Accesibilidad}></DataH>
+                <DataH descripcion="Situación" dato={dea.Accesibilidad === 1? "Interior" : "Exterior"}></DataH>
                 <View style={styles.line}></View>
                 <Disponibility id={id}></Disponibility>
                 <View style={styles.line}></View>

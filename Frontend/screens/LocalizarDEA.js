@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, SafeAreaView } from 'react-native';
+import React, { useEffect, useState, useContext } from 'react';
+import { StyleSheet, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
 import AppLoading from 'expo-app-loading';
 import Map from '../components/Map';
 import BottomSheet from '../components/BottomSheet';
 import * as Location from 'expo-location';
+import UserContext from '../context/userContext';
 //import MapLibreGL from '@rnmapbox/maps';
 
 /*MapLibreGL.setWellKnownTileServer(MapLibreGL.TileServers.MapLibre);
@@ -16,6 +17,8 @@ const MAPTILER_API_KEY = "fEiqmpW3iwff7X3070kV";*/
 
 const LocalizarDEA = ({navigation}) => 
 {
+  const usuario = useContext(UserContext);
+
   const [location, setLocation] = useState(null);
   const [deas, setDea] = useState([
     {
@@ -75,6 +78,9 @@ const LocalizarDEA = ({navigation}) =>
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaView style={styles.container}>
         <Text>*mapa*</Text>
+        <Text>{usuario.usuario != null?usuario.usuario.Nombre:'Ciudadano'}</Text>
+        <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Login")}><Text>Iniciar sesión</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Register")}><Text>Registrarse</Text></TouchableOpacity>
         <Map deas={deas} navigation={navigation}></Map>
       </SafeAreaView>
       {/*<BottomSheet></BottomSheet>*/}
@@ -89,6 +95,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  boton: {
+    backgroundColor: "grey",
+    padding: 10,
+    borderRadius: 10,
+    margin: 12
+  }
   /*page: {
     flex: 1,
     justifyContent: 'center',
