@@ -78,9 +78,16 @@ const LocalizarDEA = ({navigation}) =>
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaView style={styles.container}>
         <Text>*mapa*</Text>
-        <Text>{usuario.usuario != null?usuario.usuario.Nombre:'Ciudadano'}</Text>
-        <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Login")}><Text>Iniciar sesión</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Register")}><Text>Registrarse</Text></TouchableOpacity>
+        <Text>{Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?'Ciudadano':usuario.usuario.Nombre}</Text>
+        {
+          Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?
+          <>
+            <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Login")}><Text>Iniciar sesión</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Register")}><Text>Registrarse</Text></TouchableOpacity>
+          </>
+          :
+          <TouchableOpacity style={styles.boton} onPress={() => usuario.setUsuario({})}><Text>Cerrar sesión</Text></TouchableOpacity>
+        }
         <Map deas={deas} navigation={navigation}></Map>
       </SafeAreaView>
       {/*<BottomSheet></BottomSheet>*/}

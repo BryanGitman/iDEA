@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { SafeAreaView, StyleSheet, TextInput, Text, TouchableOpacity } from "react-native";
 import axios from "axios";
 import UserContext from "../context/userContext";
+import UserHeader from "../components/UserHeader";
+import UserFooter from "../components/UserFooter";
 
 const Login = ({ navigation }) => {
   const usuario = useContext(UserContext);
@@ -33,6 +35,7 @@ const Login = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <UserHeader navigation={navigation} titulo="Iniciar sesión"></UserHeader>
       <TextInput
         style={styles.input}
         onChangeText={handleChangeNombre}
@@ -48,9 +51,9 @@ const Login = ({ navigation }) => {
         secureTextEntry={true}
         required
       />
-      <TouchableOpacity onPress={handleLogin}><Text>Iniciar Sesion</Text></TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}><Text>No tengo cuenta</Text></TouchableOpacity>
+      <Text style={{ color: "#074496" }}>¿Te olvidaste de tu contraseña?</Text>
       <Text style={{ color: "red" }}>{msj}</Text>
+      <UserFooter navigation={navigation} handle={handleLogin} screen="Register"></UserFooter>
     </SafeAreaView>
   );
 };
@@ -58,15 +61,18 @@ const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   },
   input: {
-    height: 40,
+    width: 322,
+    height: 50,
     margin: 12,
-    borderWidth: 1,
     padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'grey'
   },
 });
 

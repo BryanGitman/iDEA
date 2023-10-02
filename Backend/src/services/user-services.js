@@ -27,7 +27,7 @@ class UserService
             .input('pNombre',sql.NVarChar,Nombre)
             .input('pFoto',sql.NVarChar,FotoPerfil)
             .input('pCUIT',sql.NVarChar,CUIT)
-            .query('INSERT INTO Usuario (Mail, Contraseña, Nombre, FotoPerfil, CUIT) VALUES (@pMail, @pContra, @pFoto, @pCUIT)');
+            .query('INSERT INTO Establecimiento (Mail, Contraseña, Nombre, FotoPerfil, CUIT) VALUES (@pMail, @pContra, @pNombre, @pFoto, @pCUIT)');
     }
 }
 
