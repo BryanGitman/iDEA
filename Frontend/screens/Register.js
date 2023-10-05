@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { SafeAreaView, StyleSheet, TextInput, Text, TouchableOpacity } from "react-native";
+import { SafeAreaView, StyleSheet, TextInput, Text, View } from "react-native";
 import axios from "axios";
 import UserContext from "../context/userContext";
 import UserHeader from "../components/UserHeader";
@@ -47,7 +47,7 @@ const Register = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <UserHeader navigation={navigation} titulo="Iniciar sesión"></UserHeader>
+      <UserHeader navigation={navigation} titulo="Registrarse"></UserHeader>
       <TextInput
         style={styles.input}
         onChangeText={handleChangeNombre}
@@ -77,8 +77,8 @@ const Register = ({ navigation }) => {
         secureTextEntry={true}
         required
       />
-      <Text style={{ color: "#074496" }}>¿Te olvidaste de tu contraseña?</Text>
       <Text style={{ color: "red" }}>{msj}</Text>
+      <View style={{flexGrow: 1}}></View>
       <UserFooter navigation={navigation} handle={handleRegister} screen="Login"></UserFooter>
     </SafeAreaView>
   );
@@ -89,7 +89,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    flexDirection: 'column'
   },
   input: {
     width: 322,

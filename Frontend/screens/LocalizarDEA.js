@@ -8,12 +8,12 @@ import Map from '../components/Map';
 import BottomSheet from '../components/BottomSheet';
 import * as Location from 'expo-location';
 import UserContext from '../context/userContext';
-//import MapLibreGL from '@rnmapbox/maps';
+/*import MapLibreGL from '@maplibre/maplibre-react-native';
 
-/*MapLibreGL.setWellKnownTileServer(MapLibreGL.TileServers.MapLibre);
 MapLibreGL.setAccessToken(null);
 
-const MAPTILER_API_KEY = "fEiqmpW3iwff7X3070kV";*/
+const apiKey = '4f56cf8f-d11b-43fe-859b-786dc252ab0a';
+const styleUrl = `https://tiles.stadiamaps.com/styles/alidade_smooth.json?api_key=${apiKey}`;*/
 
 const LocalizarDEA = ({navigation}) => 
 {
@@ -63,17 +63,10 @@ const LocalizarDEA = ({navigation}) =>
 
   return (
     /*<View style={styles.page}>
-      <View style={styles.container}>
         <MapLibreGL.MapView
           style={styles.map}
-          styleURL={`https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_API_KEY}`}
-          logoEnabled={false}
-          attributionPosition={{bottom: 8, right: 8}}>
-          <MapLibreGL.Camera
-            defaultSettings={{centerCoordinate: [2, 41.5], zoomLevel: 8}}
-          />
-        </MapLibreGL.MapView>
-      </View>
+          styleURL={styleUrl}
+        />
     </View>*/
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaView style={styles.container}>
@@ -107,23 +100,17 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     margin: 12
-  }
-  /*page: {
+  },
+  page: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  container: {
-    width: '100%',
-    height: '100%',
+    backgroundColor: '#F5FCFF',
   },
   map: {
     flex: 1,
-  },
-  image: {
-    width: 25,
-    height: 25,
-  }*/
+    alignSelf: 'stretch'
+  }
 });
 
 export default LocalizarDEA;

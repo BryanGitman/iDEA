@@ -63,7 +63,7 @@ class DEAService
             let result = await pool.request()
                 .input('pId',sql.Int,id)
                 .query(`
-                    SELECT DEA.Id, Ubicacion.Calle, Ubicacion.Altura, Ubicacion.Ciudad, Ubicacion.Pais, Ubicacion.CodigoPostal, DEA.Descripcion, DEA.Telefono, DEA.Accesibilidad, Establecimiento.Nombre, (Select Nombre From Foto where IdDEA = @pId ) as Fotos, (Select Contenido from Comentario where IdDEA = @pId ) as Comentarios  
+                    SELECT DEA.Id, Ubicacion.Calle, Ubicacion.Altura, Ubicacion.Ciudad, Ubicacion.Pais, Ubicacion.CodigoPostal, DEA.Descripcion, DEA.Telefono, DEA.Accesibilidad, Establecimiento.Nombre, (Select Nombre From Foto where IdDEA = @pId ) as Fotos, STUFF((Select Contenido from Comentario where IdDEA = @pId FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,0,'') as Comentarios  
                     from DEA
                     inner join Ubicacion on Ubicacion.Id = DEA.IdUbicacion
                     inner join Establecimiento on Establecimiento.Id = Ubicacion.IdEstablecimiento

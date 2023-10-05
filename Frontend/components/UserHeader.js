@@ -34,9 +34,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     logo: {
-        flex: 1,
         resizeMode: 'contain',
-        width: '100%',
+        width: 178,
+        height: 178
     }
 });
 
