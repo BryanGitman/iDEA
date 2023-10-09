@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
 import AppLoading from 'expo-app-loading';
@@ -8,18 +8,14 @@ import Map from '../components/Map';
 import BottomSheet from '../components/BottomSheet';
 import * as Location from 'expo-location';
 import UserContext from '../context/userContext';
-/*import MapLibreGL from '@maplibre/maplibre-react-native';
-
-MapLibreGL.setAccessToken(null);
-
-const apiKey = '4f56cf8f-d11b-43fe-859b-786dc252ab0a';
-const styleUrl = `https://tiles.stadiamaps.com/styles/alidade_smooth.json?api_key=${apiKey}`;*/
+import MapView from 'react-native-maps';
 
 const LocalizarDEA = ({navigation}) => 
 {
   const usuario = useContext(UserContext);
 
   const [location, setLocation] = useState(null);
+  const [mapRegion, setMapRegion] = useState({});
   const [deas, setDea] = useState([
     {
         "Id": 1,
@@ -56,22 +52,28 @@ const LocalizarDEA = ({navigation}) =>
     (async () => {
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
+      setMapRegion({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.01922,
+        longitudeDelta: 0.01421
+      });
     })();
 
     getDEA();
   }, []);
 
   return (
-    /*<View style={styles.page}>
-        <MapLibreGL.MapView
-          style={styles.map}
-          styleURL={styleUrl}
-        />
-    </View>*/
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaView style={styles.container}>
-        <Text>*mapa*</Text>
-        <Text>{Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?'Ciudadano':usuario.usuario.Nombre}</Text>
+        <MapView 
+          style={styles.map}
+          region={mapRegion}
+          showsUserLocation={true}
+        >
+          <Map deas={deas} navigation={navigation}></Map>
+        </MapView>
+        {/*<Text>{Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?'Ciudadano':usuario.usuario.Nombre}</Text>
         {
           Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?
           <>
@@ -81,7 +83,7 @@ const LocalizarDEA = ({navigation}) =>
           :
           <TouchableOpacity style={styles.boton} onPress={() => usuario.setUsuario({})}><Text>Cerrar sesión</Text></TouchableOpacity>
         }
-        <Map deas={deas} navigation={navigation}></Map>
+      <Map deas={deas} navigation={navigation}></Map>*/}
       </SafeAreaView>
       {/*<BottomSheet></BottomSheet>*/}
     </GestureHandlerRootView>
@@ -101,15 +103,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 12
   },
-  page: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
   map: {
-    flex: 1,
-    alignSelf: 'stretch'
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   }
 });
 

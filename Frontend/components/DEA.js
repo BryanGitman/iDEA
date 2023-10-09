@@ -1,28 +1,27 @@
 import React from 'react';
-import { StyleSheet, Image, Pressable } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
+import { Marker } from 'react-native-maps'
 
-const DEA = ({navigation, idDea}) =>
+const DEA = ({navigation, idDea, latitud, longitud}) =>
 {
     return (
-        <Pressable style={styles.container} onPress={() => navigation.navigate('InfoDEA', { id : idDea })}>
+        <Marker
+            coordinate={{latitude: latitud, longitude: longitud}}
+            style={styles.marker}
+            onPress={() => navigation.navigate('InfoDEA', { id : idDea })}
+        >
             <Image
-                style={styles.dea}
                 source={require('../assets/icono.png')}
+                style={{width: 50, height: 50}}
+                resizeMode="center"
+                resizeMethod="resize"
             />
-        </Pressable>
+        </Marker>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        width:'20%'
-    },
-    dea: {
-        flex: 1,
-        resizeMode: 'contain',
-        width: '100%',
-    }
+    
 });
 
 export default DEA;
