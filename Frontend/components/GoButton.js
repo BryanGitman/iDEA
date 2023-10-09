@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const GoButton = () =>
+const GoButton = ({navigation}) =>
 {
   return (
     <TouchableOpacity
-      //onPress={}
+      onPress={() => navigation.navigate('Emergencia')}
       style={styles.container}>
       <Icon name="arrowright" size={45} color="#FFF" />
     </TouchableOpacity>

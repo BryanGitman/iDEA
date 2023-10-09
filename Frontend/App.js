@@ -11,6 +11,7 @@ import LocalizarDEA from './screens/LocalizarDEA';
 import InfoDEA from './screens/InfoDEA';
 import Login from './screens/Login';
 import Register from './screens/Register';
+import Emergencia from './screens/Emergencia';
 import UserContext from "./context/userContext";
 
 axios.defaults.baseURL = 'http://localhost:3000';
@@ -58,6 +59,7 @@ const App = () => {
           <Stack.Screen name="InfoDEA" component={InfoDEA} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="Emergencia" component={Emergencia} />
         </Stack.Navigator>
       </NavigationContainer>
     </UserContext.Provider>

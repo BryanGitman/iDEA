@@ -5,5 +5,5 @@
   "packagerNgrokUrl": "https://sh-35b.anonymous.frontend.exp.direct",
   "ngrokPid": 10076,
   "packagerPid": null,
-  "webpackServerPort": null
+  "webpackServerPort": 19006
 }

@@ -66,7 +66,7 @@ const PrimeraPantalla = ({navigation}) =>
     <SafeAreaView style={styles.container}>
       <Header navigation={navigation}></Header>
       <Text style={{margin: '3%', fontWeight: 'bold', color: '#FFF', fontSize: 17}}>MÁS CERCANOS:</Text>
-      <List deas={firstDeas}></List>
+      <List deas={firstDeas} navigation={navigation}></List>
 
       <Shortcut navigation={navigation}></Shortcut>
     </SafeAreaView>
