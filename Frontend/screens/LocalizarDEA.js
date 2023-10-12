@@ -16,35 +16,7 @@ const LocalizarDEA = ({navigation}) =>
 
   const [location, setLocation] = useState(null);
   const [mapRegion, setMapRegion] = useState({});
-  const [deas, setDea] = useState([
-    {
-        "Id": 1,
-        "Descripcion": "Edificio 2, auditorio",
-        "Calle": "Rio de Janeiro",
-        "Altura": 509,
-        "Nombre": "Escuela Ort",
-        "Latitud": -34.60985040001025,
-        "Longitud": -58.430048464633586
-    },
-    {
-        "Id": 4,
-        "Descripcion": "Edificio 1, planta baja al lado de las escaleras",
-        "Calle": "Yatay",
-        "Altura": 240,
-        "Nombre": "Escuela Ort",
-        "Latitud": -34.609952548530885,
-        "Longitud": -58.42916481268707
-    },
-    {
-        "Id": 5,
-        "Descripcion": "Edificio 1, piso 2, al lado de coordinacion",
-        "Calle": "Yatay",
-        "Altura": 240,
-        "Nombre": "Escuela Ort",
-        "Latitud": -34.609952548530885,
-        "Longitud": -58.42916481268707
-    }
-  ]);
+  const [deas, setDea] = useState([]);
 
   const getDEA = () => axios.get('/dea').then(res => setDea(res.data)).catch(error => console.log(error));
 

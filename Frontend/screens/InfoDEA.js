@@ -14,20 +14,7 @@ const InfoDEA = ({route, navigation}) =>
 {
     const {id} = route.params;
 
-    const [dea, setDea] = useState({
-        
-        "Id": 1,
-        "Calle": "Rio de Janeiro",
-        "Altura": 509,
-        "Ciudad": "Buenos Aires",
-        "Pais": "ARG",
-        "CodigoPostal": "C1405",
-        "Descripcion": "Edificio 2, auditorio",
-        "Telefono": "011 4883 9134",
-        "Accesibilidad": 1,
-        "Nombre": "Escuela Ort"
-        
-    });
+    const [dea, setDea] = useState({});
 
     const getDEA = () => axios.get('/dea/' + id).then(res => setDea(res.data)).catch(error => console.log(error));
 

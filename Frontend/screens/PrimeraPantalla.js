@@ -14,29 +14,7 @@ const PrimeraPantalla = ({navigation}) =>
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
-  const [firstDeas, setFirstDea] = useState([
-    {
-        "Id": 4,
-        "Descripcion": "Edificio 1, planta baja al lado de las escaleras",
-        "Calle": "Yatay",
-        "Altura": 240,
-        "Nombre": "Escuela Ort"
-    },
-    {
-        "Id": 5,
-        "Descripcion": "Edificio 1, piso 2, al lado de coordinacion",
-        "Calle": "Yatay",
-        "Altura": 240,
-        "Nombre": "Escuela Ort"
-    },
-    {
-        "Id": 1,
-        "Descripcion": "Edificio 2, auditorio",
-        "Calle": "Rio de Janeiro",
-        "Altura": 509,
-        "Nombre": "Escuela Ort"
-    }
-]);
+  const [firstDeas, setFirstDea] = useState([]);
 
   const config = {
     data:{

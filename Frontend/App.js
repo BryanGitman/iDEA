@@ -14,7 +14,7 @@ import Register from './screens/Register';
 import Emergencia from './screens/Emergencia';
 import UserContext from "./context/userContext";
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'https://adelaide-wombat-jerk.2.us-1.fl0.io';
 
 const Stack = createNativeStackNavigator();
 
