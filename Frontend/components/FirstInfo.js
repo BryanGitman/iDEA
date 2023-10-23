@@ -2,7 +2,7 @@ import React from 'react';
 import GoButton from './GoButton';
 import { StyleSheet, Text, View} from 'react-native';
 
-const FirstInfo = ({direccion, establecimiento, descripcion}) =>
+const FirstInfo = ({direccion, establecimiento, descripcion, navigation}) =>
 {
   return (
     <View style={styles.ventana}>
@@ -11,7 +11,7 @@ const FirstInfo = ({direccion, establecimiento, descripcion}) =>
         <Text style={{fontSize: 20, paddingBottom: 10}}>{direccion}</Text>
         <Text style={{fontSize: 20}}>{descripcion}</Text>
       </View>
-      <GoButton></GoButton>
+      <GoButton navigation={navigation}></GoButton>
     </View>
   );
 }

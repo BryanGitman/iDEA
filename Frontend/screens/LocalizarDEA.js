@@ -9,6 +9,7 @@ import BottomSheet from '../components/BottomSheet';
 import * as Location from 'expo-location';
 import UserContext from '../context/userContext';
 import MapView from 'react-native-maps';
+import Search from '../components/Search';
 
 const LocalizarDEA = ({navigation}) => 
 {
@@ -38,6 +39,7 @@ const LocalizarDEA = ({navigation}) =>
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaView style={styles.container}>
+        <Search/>
         <MapView 
           style={styles.map}
           region={mapRegion}
@@ -78,6 +80,7 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+    marginTop: 25
   }
 });
 

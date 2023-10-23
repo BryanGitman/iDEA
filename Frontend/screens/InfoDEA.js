@@ -27,7 +27,7 @@ const InfoDEA = ({route, navigation}) =>
         <SafeAreaView style={styles.container}>
             <NavInfo navigation={navigation}></NavInfo>
             <ScrollView style={{width: '100%'}}>
-                <FirstInfo establecimiento={dea.Nombre} direccion={dea.Calle + " " + dea.Altura} descripcion={dea.Descripcion}></FirstInfo>
+                <FirstInfo establecimiento={dea.Nombre} direccion={dea.Calle + " " + dea.Altura} descripcion={dea.Descripcion} navigation={navigation}></FirstInfo>
                 <Image style={styles.imagen} source={require(`../assets/riodj.png`)}/>
                 <Phone telefono={dea.Telefono}></Phone>
                 <View style={styles.line}></View>
