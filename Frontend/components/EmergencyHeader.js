@@ -11,7 +11,7 @@ const EmergencyHeader = ({navigation}) => {
                 <View style={{flexGrow: 1}}></View>
             </View>
             <Text style={styles.titulo}>Emergencia</Text>
-            <Ambulancia name="ambulance" size={178} color='#FF0000'/>
+            <Ambulancia style={{margin: '10%'}} name="ambulance" size={125} color='#FF0000'/>
         </View>
     );
 }

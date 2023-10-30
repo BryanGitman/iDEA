@@ -10,6 +10,9 @@ import * as Location from 'expo-location';
 import UserContext from '../context/userContext';
 import MapView from 'react-native-maps';
 import Search from '../components/Search';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { Drawer } from 'react-native-paper';
 
 const LocalizarDEA = ({navigation}) => 
 {
@@ -18,6 +21,8 @@ const LocalizarDEA = ({navigation}) =>
   const [location, setLocation] = useState(null);
   const [mapRegion, setMapRegion] = useState({});
   const [deas, setDea] = useState([]);
+
+  const [navOpen, setNavOpen] = useState(false);
 
   const getDEA = () => axios.get('/dea').then(res => setDea(res.data)).catch(error => console.log(error));
 
@@ -38,7 +43,29 @@ const LocalizarDEA = ({navigation}) =>
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
+      <Drawer.Section title="Some title">
+          <Drawer.Item
+            label="First Item"
+            active={false}
+            onPress={() => navigation.navigate("Login")}
+          />
+          <Drawer.Item
+            label="Second Item"
+            active={false}
+            onPress={() => navigation.navigate("Login")}
+          />
+        </Drawer.Section>
       <SafeAreaView style={styles.container}>
+              {/*<Text>{Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?'Ciudadano':usuario.usuario.Nombre}</Text>
+              {
+                Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?
+                <>
+                  <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Login")}><Text>Iniciar sesión</Text></TouchableOpacity>
+                  <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Register")}><Text>Registrarse</Text></TouchableOpacity>
+                </>
+                :
+                <TouchableOpacity style={styles.boton} onPress={() => usuario.setUsuario({})}><Text>Cerrar sesión</Text></TouchableOpacity>
+              }*/}
         <Search/>
         <MapView 
           style={styles.map}
@@ -47,17 +74,6 @@ const LocalizarDEA = ({navigation}) =>
         >
           <Map deas={deas} navigation={navigation}></Map>
         </MapView>
-        {/*<Text>{Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?'Ciudadano':usuario.usuario.Nombre}</Text>
-        {
-          Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?
-          <>
-            <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Login")}><Text>Iniciar sesión</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Register")}><Text>Registrarse</Text></TouchableOpacity>
-          </>
-          :
-          <TouchableOpacity style={styles.boton} onPress={() => usuario.setUsuario({})}><Text>Cerrar sesión</Text></TouchableOpacity>
-        }
-      <Map deas={deas} navigation={navigation}></Map>*/}
       </SafeAreaView>
       {/*<BottomSheet></BottomSheet>*/}
     </GestureHandlerRootView>

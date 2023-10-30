@@ -3,7 +3,8 @@ import EmergencyHeader from "../components/EmergencyHeader";
 import EmergencyButton from "../components/EmergencyButton";
 
 const Emergencia = ({ navigation }) => {
-        return (
+    const telefono = 107;
+    return (
         <SafeAreaView style={styles.container}>
             <EmergencyHeader navigation={navigation}></EmergencyHeader>
             <Text>Comunicate con los servicios de emergencia</Text>
@@ -12,9 +13,9 @@ const Emergencia = ({ navigation }) => {
                     style={styles.bandera}
                     source={require('../assets/argentina.png')}
                 />
-                <Text>107</Text>
+                <Text>{telefono}</Text>
             </View>
-            <EmergencyButton></EmergencyButton>
+            <EmergencyButton telefono={telefono}></EmergencyButton>
         </SafeAreaView>
     );
 };
