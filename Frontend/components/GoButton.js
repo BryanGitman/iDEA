@@ -6,7 +6,7 @@ const GoButton = ({navigation}) =>
 {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Emergencia')}
+      onPress={() => navigation.navigate('MisDEA')}
       style={styles.container}>
       <Icon name="arrowright" size={45} color="#FFF" />
     </TouchableOpacity>
