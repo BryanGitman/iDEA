@@ -14,6 +14,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { Drawer } from 'react-native-paper';
 
+const DrawerN = createDrawerNavigator();
+
 const LocalizarDEA = ({navigation}) => 
 {
   const usuario = useContext(UserContext);
@@ -43,7 +45,8 @@ const LocalizarDEA = ({navigation}) =>
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <Drawer.Section title="Some title">
+      <NavigationContainer>
+        <Drawer.Section title="Some title">
           <Drawer.Item
             label="First Item"
             active={false}
@@ -55,6 +58,7 @@ const LocalizarDEA = ({navigation}) =>
             onPress={() => navigation.navigate("Login")}
           />
         </Drawer.Section>
+      </NavigationContainer>
       <SafeAreaView style={styles.container}>
               {/*<Text>{Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?'Ciudadano':usuario.usuario.Nombre}</Text>
               {
@@ -66,6 +70,7 @@ const LocalizarDEA = ({navigation}) =>
                 :
                 <TouchableOpacity style={styles.boton} onPress={() => usuario.setUsuario({})}><Text>Cerrar sesión</Text></TouchableOpacity>
               }*/}
+        <TouchableOpacity style={styles.boton} onPress={() => navigation.openDrawer()}><Text>=</Text></TouchableOpacity>
         <Search/>
         <MapView 
           style={styles.map}
