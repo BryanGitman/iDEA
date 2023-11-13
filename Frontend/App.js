@@ -12,6 +12,7 @@ import InfoDEA from './screens/InfoDEA';
 import Login from './screens/Login';
 import Register from './screens/Register';
 import Emergencia from './screens/Emergencia';
+import MisDEA from './screens/MisDEA';
 import UserContext from "./context/userContext";
 
 axios.defaults.baseURL = 'https://adelaide-wombat-jerk.2.us-1.fl0.io';
@@ -60,6 +61,7 @@ const App = () => {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Emergencia" component={Emergencia} />
+          <Stack.Screen name="MisDEA" component={MisDEA} />
         </Stack.Navigator>
       </NavigationContainer>
     </UserContext.Provider>

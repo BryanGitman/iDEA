@@ -27,7 +27,7 @@ const InfoDEA = ({route, navigation}) =>
             <NavInfo navigation={navigation}></NavInfo>
             <ScrollView style={{width: '100%'}}>
                 <FirstInfo establecimiento={dea.Nombre} direccion={dea.Calle + " " + dea.Altura} descripcion={dea.Descripcion} navigation={navigation}></FirstInfo>
-                <Image style={styles.imagen} source={require(`../assets/${dea.Fotos}`)}/>
+                <Image style={styles.imagen} source={require("../assets/dea1.jpg")}/>
                 <Phone telefono={dea.Telefono}></Phone>
                 <View style={styles.line}></View>
                 <Details ciudad={dea.Ciudad} pais={dea.Pais} codPostal={dea.CodigoPostal}></Details>

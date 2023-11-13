@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { StyleSheet, SafeAreaView } from "react-native";
+import DEAHeader from '../components/DEAHeader';
+import UserContext from "../context/userContext";
 
 const MisDEA = ({ navigation }) => {
-    const DEA = useContext(UserContext);
+    const usuario = useContext(UserContext);
        
     return (
       <SafeAreaView style={styles.container}>
