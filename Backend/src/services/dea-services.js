@@ -23,8 +23,7 @@ class DEAService
                     FROM DEA
                     inner join Ubicacion ubi on DEA.IdUbicacion = ubi.Id
                     inner join Establecimiento est on ubi.IdEstablecimiento = est.Id
-                    inner join Disponibilidad disp on disp.IdDea = DEA.Id
-                    WHERE HorarioApertura < (select convert(varchar(10), GETDATE(), 108)) AND HorarioCierre > (select convert(varchar(10), GETDATE(), 108)) AND Dia = (SELECT DATEPART(dw, (SELECT CONVERT (date, SYSDATETIME())))) AND DEA.Id NOT IN((SELECT IdDEA from Problema))
+                    WHERE DEA.Id NOT IN((SELECT IdDEA from Problema))
                     ORDER BY geography::Point(@orig_lat, @orig_lng, 4326).STDistance(geography::Point(ubi.Latitud, ubi.Longitud, 4326))
                 `);
             returnList = result.recordsets[0];
@@ -45,8 +44,7 @@ class DEAService
                     FROM DEA
                     inner join Ubicacion ubi on DEA.IdUbicacion = ubi.Id
                     inner join Establecimiento est on ubi.IdEstablecimiento = est.Id
-                    inner join Disponibilidad disp on disp.IdDea = DEA.Id
-                    WHERE HorarioApertura < (select convert(varchar(10), GETDATE(), 108)) AND HorarioCierre > (select convert(varchar(10), GETDATE(), 108)) AND Dia = (SELECT DATEPART(dw, (SELECT CONVERT (date, SYSDATETIME())))) AND DEA.Id NOT IN((SELECT IdDEA from Problema))
+                    WHERE DEA.Id NOT IN((SELECT IdDEA from Problema))
                 `);
             returnList = result.recordsets[0];
         } catch(error){
@@ -63,7 +61,7 @@ class DEAService
             let result = await pool.request()
                 .input('pId',sql.Int,id)
                 .query(`
-                    SELECT DEA.Id, Ubicacion.Calle, Ubicacion.Altura, Ubicacion.Ciudad, Ubicacion.Pais, Ubicacion.CodigoPostal, DEA.Descripcion, DEA.Telefono, DEA.Accesibilidad, Establecimiento.Nombre, (Select Nombre From Foto where IdDEA = @pId ) as Fotos, STUFF((Select Contenido from Comentario where IdDEA = @pId FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,0,'') as Comentarios  
+                    SELECT DEA.Id, Ubicacion.Calle, Ubicacion.Altura, Ubicacion.Ciudad, Ubicacion.Pais, Ubicacion.CodigoPostal, Ubicacion.Latitud, Ubicacion.Longitud, DEA.Descripcion, DEA.Telefono, DEA.Accesibilidad, DEA.Disponibilidad, Establecimiento.Nombre, (Select Nombre From Foto where IdDEA = @pId ) as Fotos, STUFF((Select Contenido from Comentario where IdDEA = @pId FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,0,'') as Comentarios  
                     from DEA
                     inner join Ubicacion on Ubicacion.Id = DEA.IdUbicacion
                     inner join Establecimiento on Establecimiento.Id = Ubicacion.IdEstablecimiento
@@ -76,17 +74,18 @@ class DEAService
         return returnEntity;
     }
 
-    static getDispoById = async (id) =>
+    static getByEst = async (idEst) =>
     {
         let returnList = null;
         try{
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('pId',sql.Int,id)
+                .input('pId',sql.Int,idEst)
                 .query(`
-                    Select Dia = CASE Dia When '1' Then 'Lunes' When '2' Then 'Martes' When '3' Then 'Miércoles' When '4' Then 'Jueves' When '5' Then 'Viernes' When '6' Then 'Sábado' When '7' Then 'Domingo' END, HorarioApertura, HorarioCierre
-                    from Disponibilidad
-                    where IdDEA = @pId
+                    SELECT DEA.Id, DEA.Descripcion, Ubicacion.Calle, Ubicacion.Altura
+                    FROM DEA
+                    inner join Ubicacion ON DEA.IdUbicacion = Ubicacion.Id
+                    WHERE Ubicacion.IdEstablecimiento = @pId
                 `);
             returnList = result.recordsets[0];
         } catch(error){
@@ -95,19 +94,90 @@ class DEAService
         return returnList;
     }
 
-    static insert = async (dea) =>
+    static insertUbi = async (ubicacion) =>
     {
+        const {Calle, Altura, Ciudad, Pais, CodigoPostal, Latitud, Longitud, IdEstablecimiento} = ubicacion;
+        let pool = await sql.connect(config);
+        const request = new sql.Request(pool);
+        request
+            .input('pCalle',sql.NVarChar,Calle)
+            .input('pAltura',sql.Int,Altura)
+            .input('pCiudad',sql.NVarChar,Ciudad)
+            .input('pPais',sql.NVarChar,Pais)
+            .input('pCodigoPostal',sql.NVarChar,CodigoPostal)
+            .input('pLatitud',sql.Float,Latitud)
+            .input('pLongitud',sql.Float,Longitud)
+            .input('pIdEstablecimiento',sql.Int,IdEstablecimiento)
+            .query(`
+                IF NOT EXISTS (SELECT * FROM Ubicacion WHERE Ubicacion.Calle = @pCalle AND Ubicacion.Altura = @pAltura AND Ubicacion.Ciudad = @pCiudad AND Ubicacion.Pais = @pPais AND Ubicacion.CodigoPostal = @pCodigoPostal AND Ubicacion.Latitud = @pLatitud AND Ubicacion.Longitud = @pLongitud AND Ubicacion.IdEstablecimiento = @pIdEstablecimiento)
+                BEGIN
+                INSERT INTO Ubicacion (Ubicacion.Calle, Ubicacion.Altura, Ubicacion.Ciudad, Ubicacion.Pais, Ubicacion.CodigoPostal, Ubicacion.Latitud, Ubicacion.Longitud, Ubicacion.IdEstablecimiento)
+                VALUES(@pCalle, @pAltura, @pCiudad, @pPais, @pCodigoPostal, @pLatitud, @pLongitud, @pIdEstablecimiento)
+                END
+            `);
+    }
 
+    static insertDEA = async (dea, ubicacion) =>
+    {
+        const {Descripcion, Telefono, Accesibilidad, Disponibilidad} = dea;
+        const {Calle, Altura, Ciudad, Pais, CodigoPostal, Latitud, Longitud, IdEstablecimiento} = ubicacion;
+        let pool = await sql.connect(config);
+        const request = new sql.Request(pool);
+        request
+            .input('pDescripcion',sql.NVarChar,Descripcion)
+            .input('pTelefono',sql.NVarChar,Telefono)
+            .input('pAccesibilidad',sql.Int,Accesibilidad)
+            .input('pDisponibilidad',sql.NVarChar,Disponibilidad)
+            .input('pCalle',sql.NVarChar,Calle)
+            .input('pAltura',sql.Int,Altura)
+            .input('pCiudad',sql.NVarChar,Ciudad)
+            .input('pPais',sql.NVarChar,Pais)
+            .input('pCodigoPostal',sql.NVarChar,CodigoPostal)
+            .input('pLatitud',sql.Float,Latitud)
+            .input('pLongitud',sql.Float,Longitud)
+            .input('pIdEstablecimiento',sql.Int,IdEstablecimiento)
+            .query(`
+                IF NOT EXISTS (SELECT * FROM DEA WHERE DEA.Descripcion = @pDescripcion)
+                BEGIN
+                INSERT INTO DEA (DEA.Descripcion, DEA.Telefono, DEA.Accesibilidad, DEA.IdUbicacion, DEA.Disponibilidad)
+                VALUES(@pDescripcion, @pTelefono, @pAccesibilidad, (SELECT Ubicacion.Id FROM Ubicacion WHERE Ubicacion.Calle = @pCalle AND Ubicacion.Altura = @pAltura AND Ubicacion.Ciudad = @pCiudad AND Ubicacion.Pais = @pPais AND Ubicacion.CodigoPostal = @pCodigoPostal AND Ubicacion.Latitud = @pLatitud AND Ubicacion.Longitud = @pLongitud AND Ubicacion.IdEstablecimiento = @pIdEstablecimiento), @pDisponibilidad)
+                END 
+            `);
+    }
+
+    static insertFoto = async (idDEA) =>
+    {
+        let pool = await sql.connect(config);
+        const request = new sql.Request(pool);
+        request.input('pId',sql.Int,idDEA).input('pFoto',sql.NVarChar,foto).query("INSERT INTO Foto (Nombre, IdDEA) VALUES (CONCAT('dea',@pId,'.jpg'), @pId)");
     }
 
     static update = async (dea) =>
     {
-        
+        const {Id, Descripcion, Telefono, Accesibilidad, Disponibilidad} = dea;
+        let pool = await sql.connect(config);
+        const request = new sql.Request(pool);
+        request
+            .input('pId',sql.Int,Id)
+            .input('pDescripcion',sql.NVarChar,Descripcion)
+            .input('pTelefono',sql.NVarChar,Telefono)
+            .input('pAccesibilidad',sql.Int,Accesibilidad)
+            .input('pDisponibilidad',sql.NVarChar,Disponibilidad)
+            .query('UPDATE DEA SET Descripcion = @pDescripcion, Telefono = @pTelefono, Accesibilidad = @pAccesibilidad, Disponibilidad = @pDisponibilidad WHERE Id = @pId');
     }
 
     static deleteById = async (id) =>
     {
+        let pool = await sql.connect(config);
+        const request = new sql.Request(pool);
+        request.input('pId',sql.Int,id).query('DELETE FROM DEA WHERE DEA.Id = @pId');
+    }
 
+    static deleteUbi = async () =>
+    {
+        let pool = await sql.connect(config);
+        const request = new sql.Request(pool);
+        request.query('DELETE FROM Ubicacion WHERE Ubicacion.Id not in (Select distinct DEA.IdUbicacion from DEA)');
     }
 }
 

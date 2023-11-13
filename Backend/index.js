@@ -26,10 +26,52 @@ app.get('/dea/:id', async (req, res) =>
     res.status(200).send(dea);
 });
 
-app.get('/dea/disponibilidad/:id', async (req, res) =>
+app.get('/misdea/:id', async (req, res) =>
 {
-    const disponibilidad = await DEAService.getDispoById(req.params.id);
-    res.status(200).send(disponibilidad);
+    const dea = await DEAService.getByEst(req.params.id);
+    res.status(200).send(dea);
+});
+
+app.post('/dea', async (req, res) =>
+{
+    try {
+        await DEAService.insertUbi(req.body.Ubicacion);
+        await DEAService.insertDEA(req.body.DEA, req.body.Ubicacion);
+        res.status(200).json({message: 'DEA creado'});
+    } catch(error){
+        console.log(error);
+        res.status(500).json({error: 'Falló el insert'});
+    }
+});
+
+app.put('/dea/:id', async (req, res) =>
+{
+    if(req.params.id == req.body.Id)
+    {
+        try {
+            await DEAService.update(req.body);
+            res.status(200).json({message: 'DEA actualizado'});
+        } catch(error){
+            console.log(error);
+            res.status(500).json({error: 'Falló el update'});
+        }
+    }
+    else
+    {
+        res.status(400).json({error: 'El id no coincide con el DEA'});
+    }
+});
+
+app.delete('/dea/:id', async (req, res) =>
+{
+    try {
+        await DEAService.deleteById(req.params.id);
+        await DEAService.deleteUbi();
+        res.status(200).json({message: 'DEA eliminado'});
+    } catch(error){
+        console.log(error);
+        res.status(500).json({error: 'Falló el delete'});
+    }
 });
 
 app.post('/user', async (req, res) =>

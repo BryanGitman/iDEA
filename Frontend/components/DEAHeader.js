@@ -12,7 +12,7 @@ const DEAHeader = ({navigation, logo}) => {
             <Text style={styles.titulo}>Mis Dea</Text>
             <Image
                 style={styles.logo}
-                source={require('../assets/logoort.png')}
+                source={require('../assets/ort.jpg')}
             />
         </View>
     );

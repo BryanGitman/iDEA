@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 
-const DataH = ({descripcion, dato, tColor = "black"}) => {
+const DataH = ({descripcion, dato}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.descripcion}>{descripcion}</Text>
-            <Text style={{fontSize: 16, paddingLeft: '5%', color: tColor}}>{dato}</Text>
+            <Text style={{fontSize: 16, paddingLeft: '5%'}}>{dato}</Text>
         </View>
     );
 }

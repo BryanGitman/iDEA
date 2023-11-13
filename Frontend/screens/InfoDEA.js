@@ -8,7 +8,6 @@ import FirstInfo from '../components/FirstInfo';
 import Phone from '../components/Phone';
 import Details from '../components/Details';
 import DataH from '../components/DataH';
-import Disponibility from '../components/Disponibility';
 
 const InfoDEA = ({route, navigation}) => 
 {
@@ -28,14 +27,14 @@ const InfoDEA = ({route, navigation}) =>
             <NavInfo navigation={navigation}></NavInfo>
             <ScrollView style={{width: '100%'}}>
                 <FirstInfo establecimiento={dea.Nombre} direccion={dea.Calle + " " + dea.Altura} descripcion={dea.Descripcion} navigation={navigation}></FirstInfo>
-                <Image style={styles.imagen} source={require(`../assets/riodj.png`)}/>
+                <Image style={styles.imagen} source={require(`../assets/${dea.Fotos}`)}/>
                 <Phone telefono={dea.Telefono}></Phone>
                 <View style={styles.line}></View>
                 <Details ciudad={dea.Ciudad} pais={dea.Pais} codPostal={dea.CodigoPostal}></Details>
                 <View style={styles.line}></View>
                 <DataH descripcion="Situación" dato={dea.Accesibilidad === 1? "Interior" : "Exterior"}></DataH>
                 <View style={styles.line}></View>
-                <Disponibility id={id}></Disponibility>
+                <DataH descripcion="Disponibilidad" dato={dea.Disponibilidad}></DataH>
                 <View style={styles.line}></View>
             </ScrollView>
         </SafeAreaView>
