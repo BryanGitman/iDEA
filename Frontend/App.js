@@ -1,23 +1,14 @@
 import axios from 'axios';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Text } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import PrimeraPantalla from './screens/PrimeraPantalla';
-import LocalizarDEA from './screens/LocalizarDEA';
-import InfoDEA from './screens/InfoDEA';
-import Login from './screens/Login';
-import Register from './screens/Register';
-import Emergencia from './screens/Emergencia';
-import MisDEA from './screens/MisDEA';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import UserContext from "./context/userContext";
+import DrawerNav from './components/DrawerNav';
 
 axios.defaults.baseURL = 'https://adelaide-wombat-jerk.2.us-1.fl0.io';
-
-const Stack = createNativeStackNavigator();
 
 //SplashScreen.preventAutoHideAsync();
 
@@ -54,15 +45,7 @@ const App = () => {
   return (
     <UserContext.Provider value={{usuario, setUsuario, getUsuario}}>
       <NavigationContainer onLayout={onLayoutRootView}>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Index" component={PrimeraPantalla} />
-          <Stack.Screen name="Home" component={LocalizarDEA} />
-          <Stack.Screen name="InfoDEA" component={InfoDEA} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="Emergencia" component={Emergencia} />
-          <Stack.Screen name="MisDEA" component={MisDEA} />
-        </Stack.Navigator>
+        <DrawerNav></DrawerNav>
       </NavigationContainer>
     </UserContext.Provider>
   );
