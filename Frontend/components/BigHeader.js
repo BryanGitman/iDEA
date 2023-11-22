@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, Image, Pressable, Modal } from 'react-native';
 
 const BigHeader = ({modalVisible, setModalVisible, navigation}) =>
@@ -8,6 +8,7 @@ const BigHeader = ({modalVisible, setModalVisible, navigation}) =>
     navigation.navigate('Home');
     setModalVisible(cerrado);
   }
+  
   return (
     <Modal
       animationType="fade"

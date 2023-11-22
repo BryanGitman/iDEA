@@ -1,9 +1,6 @@
-import { useContext } from 'react';
-import { Text } from 'react-native';
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useNavigation } from '@react-navigation/native';
 import DrawerContent from "./DrawerContent";
-import UserContext from '../context/userContext';
 import PrimeraPantalla from '../screens/PrimeraPantalla';
 import LocalizarDEA from '../screens/LocalizarDEA';
 import InfoDEA from '../screens/InfoDEA';
@@ -16,34 +13,22 @@ import AgregarDEA from '../screens/AgregarDEA';
 const Drawer = createDrawerNavigator();
 
 const DrawerNav = () => {
-  const usuario = useContext(UserContext);
-
   const navigation = useNavigation();
 
   return (
     <Drawer.Navigator
       initialRouteName="Index"
-      title={() => (
-        <Text style={{ color: "white" }}>
-          {!usuario.usuario ? "Ciudadano" : usuario.usuario.Nombre}
-        </Text>
-      )}
       drawerContent={() => <DrawerContent navigation={navigation} />}
       screenOptions={{
         drawerStyle: {
+          marginTop: 35,
           backgroundColor: "#074496",
-          width: 280,
-          height: 396,
+          width: 320,
+          height: 380,
           borderBottomEndRadius: 20,
         },
-        drawerItemStyle: {
-          width: 270,
-          height: 50,
-          borderRadius: 10,
-          backgroundColor: "#0A55B9",
-        },
-        swipeEnabled: true,
-        headerShown: false,
+        swipeEnabled: false,
+        headerShown: false
       }}
     >
       <Drawer.Screen name="Index" component={PrimeraPantalla} />

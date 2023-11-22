@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, TouchableOpacity, Dimensions } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
 import AppLoading from 'expo-app-loading';
@@ -10,6 +10,9 @@ import * as Location from 'expo-location';
 import UserContext from '../context/userContext';
 import MapView from 'react-native-maps';
 import Search from '../components/Search';
+import NavButton from '../components/NavButton';
+import EmergencyHomeButton from '../components/EmergencyHomeButton';
+import PlusButton from '../components/PlusButton';
 
 const LocalizarDEA = ({navigation}) => 
 {
@@ -39,17 +42,6 @@ const LocalizarDEA = ({navigation}) =>
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaView style={styles.container}>
-              {/*<Text>{Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?'Ciudadano':usuario.usuario.Nombre}</Text>
-              {
-                Object.keys(usuario.usuario).length === 0 && usuario.usuario.constructor === Object?
-                <>
-                  <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Login")}><Text>Iniciar sesión</Text></TouchableOpacity>
-                  <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("Register")}><Text>Registrarse</Text></TouchableOpacity>
-                </>
-                :
-                <TouchableOpacity style={styles.boton} onPress={() => usuario.setUsuario({})}><Text>Cerrar sesión</Text></TouchableOpacity>
-              }*/}
-        <TouchableOpacity style={styles.boton} onPress={() => navigation.openDrawer()}><Text>=</Text></TouchableOpacity>
         <Search/>
         <MapView 
           style={styles.map}
@@ -58,6 +50,9 @@ const LocalizarDEA = ({navigation}) =>
         >
           <Map deas={deas} navigation={navigation}></Map>
         </MapView>
+        <NavButton navigation={navigation}/>
+        <EmergencyHomeButton navigation={navigation}/>
+        <PlusButton navigation={navigation}/>
       </SafeAreaView>
       {/*<BottomSheet></BottomSheet>*/}
     </GestureHandlerRootView>
@@ -70,12 +65,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  boton: {
-    backgroundColor: "grey",
-    padding: 10,
-    borderRadius: 10,
-    margin: 12
   },
   map: {
     width: Dimensions.get('window').width,

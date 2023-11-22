@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     elevation: 5,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderRadius: 10
   },
   footer: {
     justifyContent: "center",
