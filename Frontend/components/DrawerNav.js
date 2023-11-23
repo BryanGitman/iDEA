@@ -18,6 +18,7 @@ const DrawerNav = () => {
   return (
     <Drawer.Navigator
       initialRouteName="Index"
+      backBehavior="history"
       drawerContent={() => <DrawerContent navigation={navigation} />}
       screenOptions={{
         drawerStyle: {

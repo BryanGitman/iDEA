@@ -6,7 +6,7 @@ const UserHeader = ({navigation, titulo}) => {
     return (
         <View style={styles.header}>
             <View style={styles.back}>
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}><Icon name="arrowleft" size={50} color="#000000" /></TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}><Icon name="arrowleft" size={50} color="#000000" /></TouchableOpacity>
                 <View style={{flexGrow: 1}}></View>
             </View>
             <Text style={styles.titulo}>{titulo}</Text>

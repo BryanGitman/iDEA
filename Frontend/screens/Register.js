@@ -33,6 +33,10 @@ const Register = ({ navigation }) => {
         .then(async (res) => {
           setMsj("");
           if (res.data.message == "Usuario creado") {
+            setMail("");
+            setContra("");
+            setCUIT("");
+            setNombre("");
             await usuario.getUsuario(nombre);
             navigation.navigate("Home");
           } else {
@@ -59,6 +63,7 @@ const Register = ({ navigation }) => {
         style={styles.input}
         onChangeText={handleChangeCUIT}
         placeholder="CUIT"
+        keyboardType="numeric"
         value={CUIT}
         required
       />
@@ -66,6 +71,8 @@ const Register = ({ navigation }) => {
         style={styles.input}
         onChangeText={handleChangeMail}
         placeholder="Mail"
+        inputMode="email"
+        keyboardType="email-address"
         value={mail}
         required
       />

@@ -16,11 +16,8 @@ const InfoDEA = ({route, navigation}) =>
     const [dea, setDea] = useState({});
 
     const getDEA = () => axios.get('/dea/' + id).then(res => setDea(res.data)).catch(error => console.log(error));
-
-    useEffect(() => 
-    {
-        getDEA();
-    }, []);
+    
+    getDEA();
 
     return(
         <SafeAreaView style={styles.container}>

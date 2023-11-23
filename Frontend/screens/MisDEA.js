@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { StyleSheet, SafeAreaView, ScrollView } from "react-native";
-import DEAHeader from '../components/DEAHeader';
+import BlueHeader from '../components/BlueHeader';
 import MiDEA from "../components/MiDEA";
 import UserContext from "../context/userContext";
 import axios from 'axios';
@@ -10,7 +10,7 @@ const MisDEA = ({ navigation }) => {
     
     const [misDea, setMisDea] = useState([]);
 
-    const getDEA = () => axios.get('/misdea/' + usuario.Id).then(res => setMisDea(res.data)).catch(error => console.log(error));
+    const getDEA = () => axios.get('/misdea/' + usuario.usuario.Id).then(res => setMisDea(res.data)).catch(error => console.log(error));
 
     useEffect(() => {
       getDEA();
@@ -18,9 +18,9 @@ const MisDEA = ({ navigation }) => {
 
     return (
       <SafeAreaView style={styles.container}>
-        <DEAHeader navigation={navigation} titulo="Mis DEA"></DEAHeader>
-        <ScrollView style={{marginLeft: 20, width: '100%'}}>
-          {misDea.map(dea => <MiDEA key={dea.Id} direccion={dea.Calle + " " + dea.Altura} descripcion={dea.Descripcion} navigation={navigation}></MiDEA>)}
+        <BlueHeader navigation={navigation} titulo="Mis DEA"></BlueHeader>
+        <ScrollView style={{marginLeft: 20, marginTop: 20, width: '100%'}}>
+          {misDea.map(dea => <MiDEA key={dea.Id} idDEA={dea.Id} direccion={dea.Calle + " " + dea.Altura} descripcion={dea.Descripcion} navigation={navigation}></MiDEA>)}
         </ScrollView>
       </SafeAreaView>
     );

@@ -1,16 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Modal, Pressable } from "react-native";
 import Icon from 'react-native-vector-icons/AntDesign';
+import axios from 'axios';
 
-const ModalLogin = ({ modalVisible, setModalVisible, navigation }) => {
-    const iniciarSesion = (cerrado) => {
-        navigation.navigate("Login");
-        setModalVisible(cerrado);
-    }
-
-    const registrarse = (cerrado) => {
-        navigation.navigate("Register");
-        setModalVisible(cerrado);
+const ModalEliminar = ({ idDEA, modalVisible, setModalVisible, navigation }) => {
+    const eliminarDEA = (cerrado) => {
+        axios.delete('/dea/' + idDEA).then(() => {
+            navigation.navigate("MisDEA");
+            setModalVisible(cerrado);
+        }).catch(error => console.log(error));
     }
 
     return (
@@ -28,10 +26,9 @@ const ModalLogin = ({ modalVisible, setModalVisible, navigation }) => {
                         <View style={{ flexGrow: 1 }}></View>
                         <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}><Icon style={styles.exit} name="close" size={30} color="#000000" /></TouchableOpacity>
                     </View>
-                    <Text style={{ fontSize: 20, margin: "10%", textAlign: "center", fontWeight: 'bold' }}>Para agregar un DEA, tenés que ser directivo de alguna institución o establecimiento</Text>
-                    <Text style={{ fontSize: 20, margin: "10%", textAlign: "center" }}>Si este es tu caso,</Text>
-                    <TouchableOpacity style={styles.button} onPress={() => iniciarSesion(!modalVisible)}><Text style={{ color: "#FFF", fontSize: 20, fontWeight: 'bold' }}>Iniciar sesion</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => registrarse(!modalVisible)}><Text style={{ color: "#FFF", fontSize: 20, fontWeight: 'bold' }}>Registrarse</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20, margin: "10%", textAlign: "center", fontWeight: 'bold' }}>¿Seguro deseas eliminar este DEA?</Text>
+                    <TouchableOpacity style={styles.deleteButton} onPress={() => eliminarDEA(!modalVisible)}><Text style={{ color: "#FFF", fontSize: 20, fontWeight: 'bold' }}>Eliminar</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.cancelButton} onPress={() => setModalVisible(!modalVisible)}><Text style={{ color: "#074496", fontSize: 20, fontWeight: 'bold' }}>Cancelar</Text></TouchableOpacity>
                 </View>
             </Pressable>
         </Modal>
@@ -45,7 +42,7 @@ const styles = StyleSheet.create({
         top: "20%",
         left: "10%",
         width: "80%",
-        height: "60%",
+        height: "45%",
         backgroundColor: "#FFF",
         shadowColor: "black",
         elevation: 5,
@@ -53,11 +50,22 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 10
     },
-    button: {
-        width: 244,
+    deleteButton: {
+        width: 179,
         height: 60,
         borderRadius: 10,
-        backgroundColor: "#0A55B9",
+        backgroundColor: "#F00",
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: '10%'
+    },
+    cancelButton: {
+        width: 179,
+        height: 60,
+        borderRadius: 10,
+        backgroundColor: "#FFF",
+        borderWidth: 2,
+        borderColor: "#074496",
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: '10%'
@@ -80,4 +88,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ModalLogin;
+export default ModalEliminar;

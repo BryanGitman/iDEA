@@ -24,6 +24,8 @@ const Login = ({ navigation }) => {
       .then(async (res) => {
         setMsj("");
         if (res.data.message == "Sesion iniciada correctamente") {
+          setNombre("");
+          setContra("");
           await usuario.getUsuario(nombre);
           navigation.navigate("Home");
         } else {

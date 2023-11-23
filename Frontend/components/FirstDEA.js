@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   contenido: {
-    flex: 1,
+    //flex: 1,
     margin: 25,
     width: '60%'
   }

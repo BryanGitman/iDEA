@@ -6,7 +6,7 @@ import IconA from 'react-native-vector-icons/AntDesign';
 const NavInfo = ({navigation}) => {
     return (
         <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}><IconE name="chevron-down" size={50} color="#000000" /></TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}><IconE name="chevron-down" size={50} color="#000000" /></TouchableOpacity>
             <View style={{flexGrow: 1}}></View>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}><IconA name="search1" size={45} color="#000000" style={{marginRight: '5%'}} /></TouchableOpacity>
             <TouchableOpacity><IconE name="warning" size={45} color="#000000" /></TouchableOpacity>
