@@ -9,6 +9,7 @@ import Register from '../screens/Register';
 import Emergencia from '../screens/Emergencia';
 import MisDEA from '../screens/MisDEA';
 import AgregarDEA from '../screens/AgregarDEA';
+import EditarDEA from '../screens/EditarDEA';
 
 const Drawer = createDrawerNavigator();
 
@@ -40,6 +41,7 @@ const DrawerNav = () => {
       <Drawer.Screen name="Emergencia" component={Emergencia} />
       <Drawer.Screen name="MisDEA" component={MisDEA} />
       <Drawer.Screen name="AgregarDEA" component={AgregarDEA} />
+      <Drawer.Screen name="EditarDEA" component={EditarDEA} />
     </Drawer.Navigator>
   );
 };

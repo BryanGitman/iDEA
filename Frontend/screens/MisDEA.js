@@ -1,4 +1,5 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useCallback } from "react";
+import { useFocusEffect } from '@react-navigation/native';
 import { StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import BlueHeader from '../components/BlueHeader';
 import MiDEA from "../components/MiDEA";
@@ -12,9 +13,11 @@ const MisDEA = ({ navigation }) => {
 
     const getDEA = () => axios.get('/misdea/' + usuario.usuario.Id).then(res => setMisDea(res.data)).catch(error => console.log(error));
 
-    useEffect(() => {
-      getDEA();
-    }, []);
+    useFocusEffect(
+      useCallback(() => {
+        getDEA();
+      }, [])
+    );
 
     return (
       <SafeAreaView style={styles.container}>

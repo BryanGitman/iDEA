@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { StyleSheet, Text, SafeAreaView, View, TouchableOpacity, Dimensions } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
@@ -24,20 +25,22 @@ const LocalizarDEA = ({navigation}) =>
 
   const getDEA = () => axios.get('/dea').then(res => setDea(res.data)).catch(error => console.log(error));
 
-  useEffect(() => {
-    (async () => {
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-      setMapRegion({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.01922,
-        longitudeDelta: 0.01421
-      });
-    })();
-
-    getDEA();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
+        setMapRegion({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.01922,
+          longitudeDelta: 0.01421
+        });
+      })();
+  
+      getDEA();
+    }, [])
+  );
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
