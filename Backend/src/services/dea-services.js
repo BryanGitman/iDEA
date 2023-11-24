@@ -19,7 +19,7 @@ class DEAService
                 .input('orig_lat',sql.Float,UserLocation.coords.latitude)
                 .input('orig_lng',sql.Float,UserLocation.coords.longitude)
                 .query(`
-                    SELECT DEA.Id, DEA.Descripcion, ubi.Calle, ubi.Altura, est.Nombre
+                    SELECT DEA.Id, DEA.Descripcion, ubi.Calle, ubi.Altura, est.Nombre, ubi.Latitud, ubi.Longitud
                     FROM DEA
                     inner join Ubicacion ubi on DEA.IdUbicacion = ubi.Id
                     inner join Establecimiento est on ubi.IdEstablecimiento = est.Id

@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity} from 'react-native';
+import { StyleSheet, TouchableOpacity, Linking} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const GoButton = ({navigation}) =>
+const GoButton = ({coords}) =>
 {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate()}
+      onPress={() => Linking.openURL(`https://www.google.com/maps/dir/?api=1&destination=${coords.latitude},${coords.longitude}&travelmode=walking`)}
       style={styles.container}>
       <Icon name="arrowright" size={45} color="#FFF" />
     </TouchableOpacity>

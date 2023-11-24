@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, SafeAreaView, View, ScrollView, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, SafeAreaView, View, ScrollView, Image, Text } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import AppLoading from 'expo-app-loading';
 import NavInfo from '../components/NavInfo';
@@ -23,8 +23,8 @@ const InfoDEA = ({route, navigation}) =>
         <SafeAreaView style={styles.container}>
             <NavInfo navigation={navigation}></NavInfo>
             <ScrollView style={{width: '100%'}}>
-                <FirstInfo establecimiento={dea.Nombre} direccion={dea.Calle + " " + dea.Altura} descripcion={dea.Descripcion} navigation={navigation}></FirstInfo>
-                <Image style={styles.imagen} source={require("../assets/dea1.jpg")}/>
+                <FirstInfo establecimiento={dea.Nombre} direccion={dea.Calle + " " + dea.Altura} descripcion={dea.Descripcion} coords={{latitude: dea.Latitud, longitude: dea.Longitud}}></FirstInfo>
+                <Image style={styles.imagen} source={require('../assets/default.png')}/>
                 <Phone telefono={dea.Telefono}></Phone>
                 <View style={styles.line}></View>
                 <Details ciudad={dea.Ciudad} pais={dea.Pais} codPostal={dea.CodigoPostal}></Details>
@@ -33,6 +33,8 @@ const InfoDEA = ({route, navigation}) =>
                 <View style={styles.line}></View>
                 <DataH descripcion="Disponibilidad" dato={dea.Disponibilidad}></DataH>
                 <View style={styles.line}></View>
+                <DataH descripcion="Comentarios" dato=""></DataH>
+                <Text style={{margin: 20}}>{dea.Comentarios}</Text>
             </ScrollView>
         </SafeAreaView>
     );

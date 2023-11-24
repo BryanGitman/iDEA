@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 100,
         backgroundColor: '#074496',
-        marginLeft: '7%',
+        marginLeft: '5%',
         alignSelf: 'flex-start'
     }
 });

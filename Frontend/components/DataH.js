@@ -5,7 +5,7 @@ const DataH = ({descripcion, dato}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.descripcion}>{descripcion}</Text>
-            <Text style={{fontSize: 16, paddingLeft: '5%'}}>{dato}</Text>
+            <Text style={{fontSize: 16, paddingLeft: '3%'}}>{dato}</Text>
         </View>
     );
 }
@@ -13,7 +13,7 @@ const DataH = ({descripcion, dato}) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        paddingLeft: '8%'
+        paddingLeft: '5%'
     },
     descripcion: {
         fontSize: 16,
